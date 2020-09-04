@@ -2,8 +2,6 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.screen import Screen
-from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
-from kivymd.uix.button import MDRoundFlatIconButton
 from kivy.properties import StringProperty
 from plyer import gps
 from kivy.utils import platform
@@ -101,10 +99,6 @@ class GPSApp(MDApp):
     class ContentNavigationDrawer(BoxLayout):
         pass
 
-    class MyToggleButton(MDRoundFlatIconButton, MDToggleButton):
-        def __init__(self, **kwargs):
-            super().__init__(**kwargs)
-            self.background_down = self.theme_cls.primary_light
 
     def request_android_permissions(self):
         """
