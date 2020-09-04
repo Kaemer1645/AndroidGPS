@@ -2,7 +2,6 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.screen import Screen
-from kivymd.uix.label import MDLabel
 from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
 from kivymd.uix.button import MDRoundFlatIconButton
 from kivy.properties import StringProperty
@@ -137,6 +136,27 @@ class GPSApp(MDApp):
 
 
 
+
+
+    def tester(self):
+        self.wyswietl = 'Udalo sie'
+    def build(self):
+        screen = Screen()
+        navigator = Builder.load_string(navigation_helper)
+        screen.add_widget(navigator)
+        try:
+            gps.configure(on_location=self.on_location,
+                          on_status=self.on_status)
+        except NotImplementedError:
+            import traceback
+            traceback.print_exc()
+            self.gps_status = 'GPS is not implemented for your platform'
+
+        if platform == "android":
+            print("gps.py: Android detected. Requesting permissions")
+            self.request_android_permissions()
+        return screen
+
     def start(self, minTime, minDistance):
         gps.start(minTime, minDistance)
 
@@ -160,27 +180,9 @@ class GPSApp(MDApp):
         gps.start(1000, 0)
         pass
 
-
-    def tester(self):
-        self.wyswietl = 'Udalo sie'
-    def build(self):
-        screen = Screen()
-        navigator = Builder.load_string(navigation_helper)
-        screen.add_widget(navigator)
-        try:
-            gps.configure(on_location=self.on_location,
-                          on_status=self.on_status)
-        except NotImplementedError:
-            import traceback
-            traceback.print_exc()
-            self.gps_status = 'GPS is not implemented for your platform'
-
-        if platform == "android":
-            print("gps.py: Android detected. Requesting permissions")
-            self.request_android_permissions()
-        return screen
     def take_photo(self):
         print('photo taken')
+
 if __name__=="__main__":
     GPSApp().run()
 
