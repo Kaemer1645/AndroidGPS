@@ -15,14 +15,13 @@ from kivy.clock import mainthread
 navigation_helper = '''
 #:import webbrowser webbrowser
 Screen:
-    MyToggleButton:
-        icon: 'crosshairs-gps'
-        text: 'Check Your Position' if self.state == 'normal' else 'Stop'
+    ToggleButton:
+        text: 'Start' if self.state == 'normal' else 'Stop'
         pos_hint: {'center_x':0.5,'center_y':0.8}
-        size: (dp(200), dp (48))
+        size_hint: 0.1, 0.1
         on_state:
-            app.start(1000, 0) if self.state == 'down' else \
-            app.stop()
+            print('kot') if self.state == 'down' else \
+            print('pies')
     MDRoundFlatIconButton:
         icon: 'google-photos'
         text: 'Take Photo Of Your Sign'
