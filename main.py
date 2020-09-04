@@ -3,7 +3,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.screen import Screen
 from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDFillRoundFlatIconButton
+from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
+from kivymd.uix.button import MDRoundFlatIconButton
 from kivy.properties import StringProperty
 from plyer import gps
 from kivy.utils import platform
@@ -11,11 +12,10 @@ from kivy.clock import mainthread
 
 
 
-
 navigation_helper = '''
 #:import webbrowser webbrowser
 Screen:
-    MDRoundFlatIconButton:
+    MyToggleButton:
         icon: 'crosshairs-gps'
         text: 'Check Your Position' if self.state == 'normal' else 'Stop'
         pos_hint: {'center_x':0.5,'center_y':0.8}
@@ -103,6 +103,11 @@ class GPSApp(MDApp):
     class ContentNavigationDrawer(BoxLayout):
         pass
 
+    class MyToggleButton(MDRoundFlatIconButton, MDToggleButton):
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self.background_down = self.theme_cls.primary_light
+
     def request_android_permissions(self):
         """
         Since API 23, Android requires permission to be requested at runtime.
@@ -179,3 +184,14 @@ class GPSApp(MDApp):
         print('photo taken')
 if __name__=="__main__":
     GPSApp().run()
+
+
+
+'''MDRoundFlatIconButton:
+        icon: 'crosshairs-gps'
+        text: 'Check Your Position' if self.state == 'normal' else 'Stop'
+        pos_hint: {'center_x':0.5,'center_y':0.8}
+        size: (dp(200), dp (48))
+        on_state:
+            app.start(1000, 0) if self.state == 'down' else \
+            app.stop()'''
