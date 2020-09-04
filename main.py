@@ -19,6 +19,9 @@ Screen:
         text: 'Start' if self.state == 'normal' else 'Stop'
         pos_hint: {'center_x':0.5,'center_y':0.8}
         size_hint: 0.1, 0.1
+        on_state:
+            app.start(1000, 0) if self.state == 'down' else \
+            app.stop()
     MDRoundFlatIconButton:
         icon: 'google-photos'
         text: 'Take Photo Of Your Sign'
