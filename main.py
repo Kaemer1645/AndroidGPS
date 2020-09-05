@@ -2,8 +2,6 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.screen import Screen
-from kivymd.uix.behaviors.toggle_behavior import MDToggleButton
-from kivymd.uix.button import MDRoundFlatIconButton
 from kivy.properties import StringProperty
 from plyer import gps
 from kivy.utils import platform
@@ -14,11 +12,10 @@ from kivy.clock import mainthread
 navigation_helper = '''
 #:import webbrowser webbrowser
 Screen:
-    MyToggleButton:
-        icon: 'crosshairs-gps'
+    ToggleButton:
         text: 'Check Your Position' if self.state == 'normal' else 'Stop'
         pos_hint: {'center_x':0.5,'center_y':0.8}
-        size: (dp(200), dp (48))
+        size_hint: 0.25, 0.1
         on_state:
             app.start(1000, 0) if self.state == 'down' else \
             app.stop()
@@ -92,10 +89,7 @@ Screen:
                                 
                             
 '''
-class MyToggleButton(MDRoundFlatIconButton, MDToggleButton):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.background_down = self.theme_cls.primary_light
+
 
 class GPSApp(MDApp):
 
