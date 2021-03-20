@@ -1,7 +1,6 @@
 # AndroidGPS
 
+I tried to create Android Mobile App similar to Geoportal Mobile, whose task will be collect
+data about point position in the urban space.
 
-Postanowiłem napisać aplikację na wzór Geoportal Mobile, która zbierałaby dane na temat 
-położenia punktów w przestrzeni.
-
-Ciągle nad tym pracuje. 
+This is still in creating process.
